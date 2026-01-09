@@ -1,5 +1,7 @@
 # DApp Ideas
 
+**[Browse Ideas Online](https://arcblock.github.io/dappideas/)** | [GitHub Issues](https://github.com/ArcBlock/dappideas/issues)
+
 A curated collection of decentralized application ideas for the ArcBlock ecosystem.
 
 > This repository contains 300+ DApp ideas collected over time. Each idea has been evaluated for feasibility, value, and AI implementation potential.
