@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DApp Ideas | ArcBlock</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-tertiary: #1a1a24;
+      --text: #e0e0e0;
+      --text-dim: #707080;
+      --text-dimmer: #505060;
+      --accent: #00ffc8;
+      --accent-dim: #00aa88;
+      --accent-secondary: #8080ff;
+      --border: #2a2a3a;
+      --highlight: #ff6b6b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--text);
+      text-shadow: 0 0 8px var(--accent);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 32px 0;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 100;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 14px;
+      color: var(--text-dim);
+    }
+
+    .logo-main {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -1px;
+    }
+
+    .logo-main .accent {
+      color: var(--accent);
+    }
+
+    .header-meta {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .lang-toggle {
+      display: flex;
+      gap: 4px;
+      background: var(--bg-secondary);
+      padding: 4px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .lang-btn {
+      padding: 6px 12px;
+      background: transparent;
+      border: none;
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 12px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s ease;
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .lang-btn:hover:not(.active) {
+      color: var(--text);
+    }
+
+    .github-link {
+      font-size: 12px;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .github-link:hover {
+      border-color: var(--accent);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-ascii {
+      font-size: 10px;
+      line-height: 1.2;
+      color: var(--accent-dim);
+      margin-bottom: 32px;
+      opacity: 0.6;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 300;
+      margin-bottom: 16px;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 strong {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text-dim);
+      max-width: 600px;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 40px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Navigation */
+    .nav-section {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 89px;
+      background: var(--bg);
+      z-index: 99;
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav-tab {
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 12px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-tab:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .nav-tab.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
+    }
+
+    /* Main content */
+    main {
+      padding: 48px 0;
+    }
+
+    .section {
+      margin-bottom: 64px;
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .section-header {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .section-desc {
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+
+    /* Ideas table */
+    .ideas-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .ideas-table th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-dimmer);
+      border-bottom: 1px solid var(--border);
+      font-weight: 500;
+    }
+
+    .ideas-table td {
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .ideas-table tr:hover {
+      background: var(--bg-secondary);
+    }
+
+    .idea-number {
+      font-size: 12px;
+      color: var(--text-dimmer);
+      font-weight: 500;
+    }
+
+    .idea-title {
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .idea-desc {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .idea-score {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .score-high {
+      color: var(--accent);
+    }
+
+    .score-medium {
+      color: var(--accent-secondary);
+    }
+
+    .idea-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 10px;
+      padding: 4px 8px;
+      background: var(--bg-tertiary);
+      border-radius: 2px;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+    }
+
+    .tag.ai {
+      border-color: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    /* Category cards */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 16px;
+    }
+
+    .category-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .category-card:hover {
+      border-color: var(--accent);
+    }
+
+    .category-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .category-count {
+      font-size: 12px;
+      color: var(--text-dimmer);
+      background: var(--bg-tertiary);
+      padding: 2px 8px;
+      border-radius: 2px;
+    }
+
+    .category-ideas {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .category-idea {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .category-idea:last-child {
+      border-bottom: none;
+    }
+
+    .category-idea-num {
+      color: var(--text-dimmer);
+      font-size: 11px;
+      margin-right: 8px;
+    }
+
+    /* Quick wins */
+    .quickwin-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .quickwin-item {
+      display: flex;
+      align-items: center;
+      padding: 20px 24px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .quickwin-item:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    .quickwin-num {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent);
+      width: 80px;
+    }
+
+    .quickwin-content {
+      flex: 1;
+    }
+
+    .quickwin-title {
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .quickwin-reason {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .quickwin-arrow {
+      color: var(--text-dimmer);
+      font-size: 20px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+      margin-top: 64px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-left {
+      font-size: 12px;
+      color: var(--text-dimmer);
+    }
+
+    .footer-ascii {
+      font-size: 10px;
+      color: var(--text-dimmer);
+      opacity: 0.5;
+    }
+
+    /* Terminal cursor blink */
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 20px;
+      background: var(--accent);
+      margin-left: 4px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .hero-stats {
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+
+      .ideas-table {
+        font-size: 13px;
+      }
+
+      .ideas-table th:nth-child(4),
+      .ideas-table td:nth-child(4) {
+        display: none;
+      }
+
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--text-dimmer);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-content">
+      <div class="logo">
+        <div class="logo-main"><span class="accent">&gt;</span> DApp<span class="accent">Ideas</span></div>
+        <span>ArcBlock Ecosystem</span>
+      </div>
+      <div class="header-meta">
+        <div class="lang-toggle">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="zh">ZH</button>
+        </div>
+        <a href="https://github.com/ArcBlock/dappideas" class="github-link" target="_blank">
+          <span>[</span> GitHub <span>]</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <pre class="hero-ascii">
+    ╔═══════════════════════════════════════════════════════════════╗
+    ║  ██████╗  █████╗ ██████╗ ██████╗     ██╗██████╗ ███████╗ █████╗███████╗  ║
+    ║  ██╔══██╗██╔══██╗██╔══██╗██╔══██╗    ██║██╔══██╗██╔════╝██╔══██╗██╔════╝  ║
+    ║  ██║  ██║███████║██████╔╝██████╔╝    ██║██║  ██║█████╗  ███████║███████╗  ║
+    ║  ██║  ██║██╔══██║██╔═══╝ ██╔═══╝     ██║██║  ██║██╔══╝  ██╔══██║╚════██║  ║
+    ║  ██████╔╝██║  ██║██║     ██║         ██║██████╔╝███████╗██║  ██║███████║  ║
+    ║  ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝         ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝  ║
+    ╚═══════════════════════════════════════════════════════════════╝</pre>
+      <h1 data-en="Curated <strong>DApp</strong> Ideas" data-zh="精选 <strong>DApp</strong> 创意">Curated <strong>DApp</strong> Ideas</h1>
+      <p class="hero-desc" data-en="300+ decentralized application ideas for the Web3 ecosystem. Each evaluated for feasibility, value, and AI implementation potential." data-zh="300+ 去中心化应用创意，每个都经过可行性、价值和 AI 实现潜力的评估。">300+ decentralized application ideas for the Web3 ecosystem. Each evaluated for feasibility, value, and AI implementation potential.</p>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">318</span>
+          <span class="stat-label" data-en="Total Ideas" data-zh="创意总数">Total Ideas</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">20</span>
+          <span class="stat-label" data-en="Top Rated" data-zh="高评分">Top Rated</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">13</span>
+          <span class="stat-label" data-en="Categories" data-zh="分类">Categories</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">CC0</span>
+          <span class="stat-label" data-en="License" data-zh="许可证">License</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="nav-section">
+    <div class="container">
+      <div class="nav-tabs">
+        <button class="nav-tab active" data-section="top" data-en="Top Rated" data-zh="高评分">Top Rated</button>
+        <button class="nav-tab" data-section="ai" data-en="AI/LLM" data-zh="AI/LLM">AI/LLM</button>
+        <button class="nav-tab" data-section="categories" data-en="Categories" data-zh="分类浏览">Categories</button>
+        <button class="nav-tab" data-section="quickwin" data-en="Quick Wins" data-zh="快速实现">Quick Wins</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Top Rated Section -->
+    <section id="top" class="section active">
+      <div class="section-header">
+        <h2 class="section-title" data-en="// TOP RECOMMENDATIONS" data-zh="// 高评分推荐">// TOP RECOMMENDATIONS</h2>
+        <p class="section-desc" data-en="Ideas with comprehensive score >= 7.0" data-zh="综合评分 >= 7.0 的创意">Ideas with comprehensive score >= 7.0</p>
+      </div>
+
+      <table class="ideas-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th data-en="Idea" data-zh="创意">Idea</th>
+            <th data-en="Score" data-zh="评分">Score</th>
+            <th data-en="Tags" data-zh="标签">Tags</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="idea-number">#307</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/307" target="_blank">
+                <div class="idea-title" data-en="AI Social Media Tool" data-zh="AI 社交媒体工具">AI Social Media Tool</div>
+              </a>
+              <div class="idea-desc" data-en="AI-powered tweet generation + scheduling, Buffer/Hootsuite alternative" data-zh="AI 驱动推文生成+定时发布，替代 Buffer/Hootsuite">AI-powered tweet generation + scheduling, Buffer/Hootsuite alternative</div>
+            </td>
+            <td><span class="idea-score score-high">8.0</span></td>
+            <td><div class="idea-tags"><span class="tag ai">AI:10</span><span class="tag">Social</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#320</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/320" target="_blank">
+                <div class="idea-title" data-en="VC KYC Service" data-zh="VC KYC 服务">VC KYC Service</div>
+              </a>
+              <div class="idea-desc" data-en="AI face verification + verifiable credentials" data-zh="AI 人脸验证+可验证凭证">AI face verification + verifiable credentials</div>
+            </td>
+            <td><span class="idea-score score-high">7.7</span></td>
+            <td><div class="idea-tags"><span class="tag ai">AI:9</span><span class="tag">Identity</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#93</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/93" target="_blank">
+                <div class="idea-title" data-en="Editor Blocklet" data-zh="编辑器 Blocklet">Editor Blocklet</div>
+              </a>
+              <div class="idea-desc" data-en="Multi-backend storage editor with AI writing assistant" data-zh="多后端存储编辑器，AI 写作助手">Multi-backend storage editor with AI writing assistant</div>
+            </td>
+            <td><span class="idea-score score-high">7.5</span></td>
+            <td><div class="idea-tags"><span class="tag ai">AI:9</span><span class="tag">Productivity</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#324</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/324" target="_blank">
+                <div class="idea-title" data-en="Gmail Backup + AI Assistant" data-zh="Gmail 备份+AI 助手">Gmail Backup + AI Assistant</div>
+              </a>
+              <div class="idea-desc" data-en="Email backup + AI analysis, privacy-focused" data-zh="邮件备份+AI 分析，隐私保护">Email backup + AI analysis, privacy-focused</div>
+            </td>
+            <td><span class="idea-score score-high">7.3</span></td>
+            <td><div class="idea-tags"><span class="tag ai">AI:9</span><span class="tag">Privacy</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#101</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/101" target="_blank">
+                <div class="idea-title" data-en="Customer Service Chat" data-zh="客服聊天 Blocklet">Customer Service Chat</div>
+              </a>
+              <div class="idea-desc" data-en="AI-powered customer service, Intercom alternative" data-zh="AI 智能客服，类似 Intercom">AI-powered customer service, Intercom alternative</div>
+            </td>
+            <td><span class="idea-score score-high">7.3</span></td>
+            <td><div class="idea-tags"><span class="tag ai">AI:9</span><span class="tag">B2B</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#175</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/175" target="_blank">
+                <div class="idea-title" data-en="Decentralized Form Collector" data-zh="去中心化表单收集器">Decentralized Form Collector</div>
+              </a>
+              <div class="idea-desc" data-en="Typeform alternative with data sovereignty" data-zh="类似 Typeform，数据主权">Typeform alternative with data sovereignty</div>
+            </td>
+            <td><span class="idea-score score-high">7.3</span></td>
+            <td><div class="idea-tags"><span class="tag">Productivity</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#296</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/296" target="_blank">
+                <div class="idea-title" data-en="Decentralized Social Network Model" data-zh="去中心化社交网络模型">Decentralized Social Network Model</div>
+              </a>
+              <div class="idea-desc" data-en="Detailed architecture design, Social Node + Hub" data-zh="详细架构设计，Social Node + Hub 概念">Detailed architecture design, Social Node + Hub</div>
+            </td>
+            <td><span class="idea-score score-high">7.2</span></td>
+            <td><div class="idea-tags"><span class="tag">Social</span><span class="tag">Architecture</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#304</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/304" target="_blank">
+                <div class="idea-title" data-en="ChatGPT Writing Tool" data-zh="ChatGPT 写作工具">ChatGPT Writing Tool</div>
+              </a>
+              <div class="idea-desc" data-en="AI-driven bots and writing templates" data-zh="AI 驱动 bot 和写作模板">AI-driven bots and writing templates</div>
+            </td>
+            <td><span class="idea-score score-high">7.2</span></td>
+            <td><div class="idea-tags"><span class="tag ai">AI:10</span><span class="tag">Content</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#21</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/21" target="_blank">
+                <div class="idea-title" data-en="Badge/Certificate Design Shop" data-zh="徽章/证书设计店">Badge/Certificate Design Shop</div>
+              </a>
+              <div class="idea-desc" data-en="Education certification marketplace" data-zh="教育认证市场">Education certification marketplace</div>
+            </td>
+            <td><span class="idea-score score-high">7.2</span></td>
+            <td><div class="idea-tags"><span class="tag">Identity</span><span class="tag">Education</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#119</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/119" target="_blank">
+                <div class="idea-title" data-en="Invoice Generator" data-zh="发票生成器">Invoice Generator</div>
+              </a>
+              <div class="idea-desc" data-en="E-commerce invoicing + crypto payments" data-zh="电商发票+加密支付">E-commerce invoicing + crypto payments</div>
+            </td>
+            <td><span class="idea-score score-high">7.0</span></td>
+            <td><div class="idea-tags"><span class="tag">E-commerce</span><span class="tag">Payments</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#317</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/317" target="_blank">
+                <div class="idea-title" data-en="Transparent Selection Process" data-zh="透明评选流程">Transparent Selection Process</div>
+              </a>
+              <div class="idea-desc" data-en="Hackathon/community voting with VC/NFT rewards" data-zh="hackathon/社区评选，VC/NFT 颁发">Hackathon/community voting with VC/NFT rewards</div>
+            </td>
+            <td><span class="idea-score score-high">7.0</span></td>
+            <td><div class="idea-tags"><span class="tag">Events</span><span class="tag">DAO</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#308</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/308" target="_blank">
+                <div class="idea-title" data-en="User Feedback Collection" data-zh="用户反馈收集">User Feedback Collection</div>
+              </a>
+              <div class="idea-desc" data-en="Testimonial video collection" data-zh="testimonial 视频收集">Testimonial video collection</div>
+            </td>
+            <td><span class="idea-score score-high">7.0</span></td>
+            <td><div class="idea-tags"><span class="tag">B2B</span><span class="tag">Marketing</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#30</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/30" target="_blank">
+                <div class="idea-title" data-en="Client DID Portal" data-zh="客户 DID 门户">Client DID Portal</div>
+              </a>
+              <div class="idea-desc" data-en="B2B sales client portal" data-zh="B2B 销售客户门户">B2B sales client portal</div>
+            </td>
+            <td><span class="idea-score score-high">7.0</span></td>
+            <td><div class="idea-tags"><span class="tag">B2B</span><span class="tag">DID</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#290</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/290" target="_blank">
+                <div class="idea-title" data-en="Event Registration Portal" data-zh="活动报名门户">Event Registration Portal</div>
+              </a>
+              <div class="idea-desc" data-en="Crowdcast.io alternative" data-zh="类似 crowdcast.io">Crowdcast.io alternative</div>
+            </td>
+            <td><span class="idea-score score-high">7.0</span></td>
+            <td><div class="idea-tags"><span class="tag">Events</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#166</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/166" target="_blank">
+                <div class="idea-title" data-en="Decentralized LinkedIn" data-zh="去中心化 LinkedIn">Decentralized LinkedIn</div>
+              </a>
+              <div class="idea-desc" data-en="Professional profiles + VC verification" data-zh="职业档案+VC 验证">Professional profiles + VC verification</div>
+            </td>
+            <td><span class="idea-score score-high">7.0</span></td>
+            <td><div class="idea-tags"><span class="tag">Social</span><span class="tag">Identity</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#16</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/16" target="_blank">
+                <div class="idea-title" data-en="Crypto Knowledge Community" data-zh="Crypto 知识星球">Crypto Knowledge Community</div>
+              </a>
+              <div class="idea-desc" data-en="Paid private community" data-zh="付费私密社群">Paid private community</div>
+            </td>
+            <td><span class="idea-score score-high">7.0</span></td>
+            <td><div class="idea-tags"><span class="tag">Social</span><span class="tag">Creator</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#94</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/94" target="_blank">
+                <div class="idea-title" data-en="Decentralized Knowledge Base" data-zh="去中心化知识库">Decentralized Knowledge Base</div>
+              </a>
+              <div class="idea-desc" data-en="Offline-first + token incentives" data-zh="离线优先+Token 激励">Offline-first + token incentives</div>
+            </td>
+            <td><span class="idea-score score-high">7.0</span></td>
+            <td><div class="idea-tags"><span class="tag ai">AI:9</span><span class="tag">Productivity</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#106</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/106" target="_blank">
+                <div class="idea-title" data-en="Personal Link Page" data-zh="个人链接页面">Personal Link Page</div>
+              </a>
+              <div class="idea-desc" data-en="Linktree alternative" data-zh="Linktree 替代">Linktree alternative</div>
+            </td>
+            <td><span class="idea-score score-high">7.0</span></td>
+            <td><div class="idea-tags"><span class="tag">Identity</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#66</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/66" target="_blank">
+                <div class="idea-title" data-en="RSS Reader" data-zh="RSS 阅读器">RSS Reader</div>
+              </a>
+              <div class="idea-desc" data-en="Simple quick-win project" data-zh="简单快赢项目">Simple quick-win project</div>
+            </td>
+            <td><span class="idea-score score-high">7.0</span></td>
+            <td><div class="idea-tags"><span class="tag">Productivity</span></div></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#85</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/85" target="_blank">
+                <div class="idea-title" data-en="Decentralized Bookmarks" data-zh="去中心化书签">Decentralized Bookmarks</div>
+              </a>
+              <div class="idea-desc" data-en="Encrypted bookmarks with sharing incentives" data-zh="加密激励分享">Encrypted bookmarks with sharing incentives</div>
+            </td>
+            <td><span class="idea-score score-high">7.0</span></td>
+            <td><div class="idea-tags"><span class="tag">Productivity</span></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- AI/LLM Section -->
+    <section id="ai" class="section">
+      <div class="section-header">
+        <h2 class="section-title" data-en="// AI/LLM APPLICATIONS" data-zh="// AI/LLM 应用">// AI/LLM APPLICATIONS</h2>
+        <p class="section-desc" data-en="Ideas with high AI/LLM applicability (AI score >= 8)" data-zh="AI/LLM 适用性评分 >= 8 的创意">Ideas with high AI/LLM applicability (AI score >= 8)</p>
+      </div>
+
+      <table class="ideas-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th data-en="Idea" data-zh="创意">Idea</th>
+            <th data-en="AI Score" data-zh="AI 评分">AI Score</th>
+            <th data-en="Category" data-zh="分类">Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="idea-number">#307</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/307" target="_blank">
+                <div class="idea-title" data-en="AI Social Media Tool" data-zh="AI 社交媒体工具">AI Social Media Tool</div>
+              </a>
+            </td>
+            <td><span class="idea-score score-high">10</span></td>
+            <td><span class="tag">Social</span></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#304</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/304" target="_blank">
+                <div class="idea-title" data-en="ChatGPT Writing Tool" data-zh="ChatGPT 写作工具">ChatGPT Writing Tool</div>
+              </a>
+            </td>
+            <td><span class="idea-score score-high">10</span></td>
+            <td><span class="tag">Content</span></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#305</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/305" target="_blank">
+                <div class="idea-title" data-en="Multi-platform Bot Tool" data-zh="多平台 Bot 工具">Multi-platform Bot Tool</div>
+              </a>
+            </td>
+            <td><span class="idea-score score-high">9</span></td>
+            <td><span class="tag">Automation</span></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#101</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/101" target="_blank">
+                <div class="idea-title" data-en="AI Customer Chat" data-zh="AI 客服聊天">AI Customer Chat</div>
+              </a>
+            </td>
+            <td><span class="idea-score score-high">9</span></td>
+            <td><span class="tag">B2B</span></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#320</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/320" target="_blank">
+                <div class="idea-title" data-en="VC KYC Service" data-zh="VC KYC 服务">VC KYC Service</div>
+              </a>
+            </td>
+            <td><span class="idea-score score-high">9</span></td>
+            <td><span class="tag">Identity</span></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#324</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/324" target="_blank">
+                <div class="idea-title" data-en="Gmail AI Assistant" data-zh="Gmail AI 助手">Gmail AI Assistant</div>
+              </a>
+            </td>
+            <td><span class="idea-score score-high">9</span></td>
+            <td><span class="tag">Productivity</span></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#93</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/93" target="_blank">
+                <div class="idea-title" data-en="Editor + AI Writing" data-zh="编辑器 + AI 写作">Editor + AI Writing</div>
+              </a>
+            </td>
+            <td><span class="idea-score score-high">9</span></td>
+            <td><span class="tag">Productivity</span></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#94</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/94" target="_blank">
+                <div class="idea-title" data-en="Knowledge Base + AI Search" data-zh="知识库 + AI 搜索">Knowledge Base + AI Search</div>
+              </a>
+            </td>
+            <td><span class="idea-score score-high">9</span></td>
+            <td><span class="tag">Productivity</span></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#287</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/287" target="_blank">
+                <div class="idea-title" data-en="Product Research" data-zh="产品研究">Product Research</div>
+              </a>
+            </td>
+            <td><span class="idea-score score-medium">8</span></td>
+            <td><span class="tag">Research</span></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#281</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/281" target="_blank">
+                <div class="idea-title" data-en="Guide-to-earn" data-zh="Guide-to-earn">Guide-to-earn</div>
+              </a>
+            </td>
+            <td><span class="idea-score score-medium">8</span></td>
+            <td><span class="tag">Creator</span></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#283</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/283" target="_blank">
+                <div class="idea-title" data-en="E-zine Publishing" data-zh="E-zine 出版">E-zine Publishing</div>
+              </a>
+            </td>
+            <td><span class="idea-score score-medium">8</span></td>
+            <td><span class="tag">Creator</span></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#289</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/289" target="_blank">
+                <div class="idea-title" data-en="Social Recommendation Mining" data-zh="社交推荐挖矿">Social Recommendation Mining</div>
+              </a>
+            </td>
+            <td><span class="idea-score score-medium">8</span></td>
+            <td><span class="tag">Social</span></td>
+          </tr>
+          <tr>
+            <td><span class="idea-number">#298</span></td>
+            <td>
+              <a href="https://github.com/ArcBlock/dappideas/issues/298" target="_blank">
+                <div class="idea-title" data-en="Expert Network" data-zh="专家网络">Expert Network</div>
+              </a>
+            </td>
+            <td><span class="idea-score score-medium">8</span></td>
+            <td><span class="tag">B2B</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="section">
+      <div class="section-header">
+        <h2 class="section-title" data-en="// BROWSE BY CATEGORY" data-zh="// 分类浏览">// BROWSE BY CATEGORY</h2>
+        <p class="section-desc" data-en="Explore ideas organized by domain" data-zh="按领域探索创意">Explore ideas organized by domain</p>
+      </div>
+
+      <div class="category-grid">
+        <div class="category-card">
+          <div class="category-name">
+            <span data-en="Social & Content" data-zh="社交/内容">Social & Content</span>
+            <span class="category-count">7</span>
+          </div>
+          <div class="category-ideas">
+            <a href="https://github.com/ArcBlock/dappideas/issues/296" target="_blank" class="category-idea"><span><span class="category-idea-num">#296</span><span data-en="Decentralized Social Network" data-zh="去中心化社交网络">Decentralized Social Network</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/77" target="_blank" class="category-idea"><span><span class="category-idea-num">#77</span><span data-en="Decentralized Moments" data-zh="去中心化朋友圈">Decentralized Moments</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/16" target="_blank" class="category-idea"><span><span class="category-idea-num">#16</span><span data-en="Knowledge Community" data-zh="知识星球">Knowledge Community</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/214" target="_blank" class="category-idea"><span><span class="category-idea-num">#214</span><span data-en="ActivityPub Support" data-zh="ActivityPub 支持">ActivityPub Support</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/310" target="_blank" class="category-idea"><span><span class="category-idea-num">#310</span><span data-en="Nostr Blocklet" data-zh="Nostr Blocklet">Nostr Blocklet</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/7" target="_blank" class="category-idea"><span><span class="category-idea-num">#7</span><span data-en="Crypto Dating App" data-zh="Crypto 交友应用">Crypto Dating App</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/8" target="_blank" class="category-idea"><span><span class="category-idea-num">#8</span><span data-en="Crypto Message Bottle" data-zh="Crypto 漂流瓶">Crypto Message Bottle</span></span></a>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-name">
+            <span data-en="Events & Conferences" data-zh="活动/会议">Events & Conferences</span>
+            <span class="category-count">4</span>
+          </div>
+          <div class="category-ideas">
+            <a href="https://github.com/ArcBlock/dappideas/issues/312" target="_blank" class="category-idea"><span><span class="category-idea-num">#312</span><span data-en="Eventchain" data-zh="Eventchain 活动管理">Eventchain</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/290" target="_blank" class="category-idea"><span><span class="category-idea-num">#290</span><span data-en="Event Registration" data-zh="活动报名门户">Event Registration</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/322" target="_blank" class="category-idea"><span><span class="category-idea-num">#322</span><span data-en="Slido Interactive" data-zh="Slido 互动工具">Slido Interactive</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/317" target="_blank" class="category-idea"><span><span class="category-idea-num">#317</span><span data-en="Transparent Voting" data-zh="透明评选流程">Transparent Voting</span></span></a>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-name">
+            <span data-en="Productivity Tools" data-zh="生产力工具">Productivity Tools</span>
+            <span class="category-count">9</span>
+          </div>
+          <div class="category-ideas">
+            <a href="https://github.com/ArcBlock/dappideas/issues/93" target="_blank" class="category-idea"><span><span class="category-idea-num">#93</span><span data-en="Editor Blocklet" data-zh="编辑器 Blocklet">Editor Blocklet</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/175" target="_blank" class="category-idea"><span><span class="category-idea-num">#175</span><span data-en="Form Collector" data-zh="表单收集器">Form Collector</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/66" target="_blank" class="category-idea"><span><span class="category-idea-num">#66</span><span data-en="RSS Reader" data-zh="RSS 阅读器">RSS Reader</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/85" target="_blank" class="category-idea"><span><span class="category-idea-num">#85</span><span data-en="Bookmark Manager" data-zh="书签管理">Bookmark Manager</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/94" target="_blank" class="category-idea"><span><span class="category-idea-num">#94</span><span data-en="Knowledge Base" data-zh="知识库">Knowledge Base</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/297" target="_blank" class="category-idea"><span><span class="category-idea-num">#297</span><span data-en="TiddlyWiki" data-zh="TiddlyWiki">TiddlyWiki</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/293" target="_blank" class="category-idea"><span><span class="category-idea-num">#293</span><span data-en="CryptPad" data-zh="CryptPad">CryptPad</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/314" target="_blank" class="category-idea"><span><span class="category-idea-num">#314</span><span data-en="NocoDB" data-zh="NocoDB">NocoDB</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/287" target="_blank" class="category-idea"><span><span class="category-idea-num">#287</span><span data-en="Product Research" data-zh="产品研究">Product Research</span></span></a>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-name">
+            <span data-en="B2B Sales & CRM" data-zh="B2B 销售/CRM">B2B Sales & CRM</span>
+            <span class="category-count">5</span>
+          </div>
+          <div class="category-ideas">
+            <a href="https://github.com/ArcBlock/dappideas/issues/30" target="_blank" class="category-idea"><span><span class="category-idea-num">#30</span><span data-en="Client DID Portal" data-zh="客户 DID 门户">Client DID Portal</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/319" target="_blank" class="category-idea"><span><span class="category-idea-num">#319</span><span data-en="Video Message Tool" data-zh="视频消息工具">Video Message Tool</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/308" target="_blank" class="category-idea"><span><span class="category-idea-num">#308</span><span data-en="Feedback Collection" data-zh="反馈收集">Feedback Collection</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/299" target="_blank" class="category-idea"><span><span class="category-idea-num">#299</span><span data-en="Decentralized HubSpot" data-zh="去中心化 HubSpot">Decentralized HubSpot</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/101" target="_blank" class="category-idea"><span><span class="category-idea-num">#101</span><span data-en="Customer Service Chat" data-zh="客服聊天">Customer Service Chat</span></span></a>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-name">
+            <span data-en="Identity & Verification" data-zh="身份/认证">Identity & Verification</span>
+            <span class="category-count">4</span>
+          </div>
+          <div class="category-ideas">
+            <a href="https://github.com/ArcBlock/dappideas/issues/320" target="_blank" class="category-idea"><span><span class="category-idea-num">#320</span><span data-en="VC KYC Service" data-zh="VC KYC 服务">VC KYC Service</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/166" target="_blank" class="category-idea"><span><span class="category-idea-num">#166</span><span data-en="Decentralized LinkedIn" data-zh="去中心化 LinkedIn">Decentralized LinkedIn</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/106" target="_blank" class="category-idea"><span><span class="category-idea-num">#106</span><span data-en="Personal Link Page" data-zh="个人链接页面">Personal Link Page</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/21" target="_blank" class="category-idea"><span><span class="category-idea-num">#21</span><span data-en="Badge/Certificate" data-zh="徽章/证书">Badge/Certificate</span></span></a>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-name">
+            <span data-en="E-commerce & Payments" data-zh="电商/支付">E-commerce & Payments</span>
+            <span class="category-count">2</span>
+          </div>
+          <div class="category-ideas">
+            <a href="https://github.com/ArcBlock/dappideas/issues/119" target="_blank" class="category-idea"><span><span class="category-idea-num">#119</span><span data-en="Invoice Generator" data-zh="发票生成器">Invoice Generator</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/277" target="_blank" class="category-idea"><span><span class="category-idea-num">#277</span><span data-en="Crypto Gumroad" data-zh="Crypto Gumroad">Crypto Gumroad</span></span></a>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-name">
+            <span data-en="Creator Economy" data-zh="创作者经济">Creator Economy</span>
+            <span class="category-count">3</span>
+          </div>
+          <div class="category-ideas">
+            <a href="https://github.com/ArcBlock/dappideas/issues/283" target="_blank" class="category-idea"><span><span class="category-idea-num">#283</span><span data-en="E-zine Publishing" data-zh="E-zine 出版">E-zine Publishing</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/281" target="_blank" class="category-idea"><span><span class="category-idea-num">#281</span><span data-en="Guide-to-earn" data-zh="Guide-to-earn">Guide-to-earn</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/284" target="_blank" class="category-idea"><span><span class="category-idea-num">#284</span><span data-en="Listen-to-earn" data-zh="Listen-to-earn">Listen-to-earn</span></span></a>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-name">
+            <span data-en="Developer Tools" data-zh="开发者工具">Developer Tools</span>
+            <span class="category-count">4</span>
+          </div>
+          <div class="category-ideas">
+            <a href="https://github.com/ArcBlock/dappideas/issues/316" target="_blank" class="category-idea"><span><span class="category-idea-num">#316</span><span data-en="OpenGraph Detector" data-zh="OpenGraph 检测">OpenGraph Detector</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/306" target="_blank" class="category-idea"><span><span class="category-idea-num">#306</span><span data-en="Cryptii Blocklet" data-zh="Cryptii 编解码">Cryptii Blocklet</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/311" target="_blank" class="category-idea"><span><span class="category-idea-num">#311</span><span data-en="TurboETH Template" data-zh="TurboETH 模板">TurboETH Template</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/122" target="_blank" class="category-idea"><span><span class="category-idea-num">#122</span><span data-en="Gitea Blocklet" data-zh="Gitea Blocklet">Gitea Blocklet</span></span></a>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-name">
+            <span data-en="Games & Entertainment" data-zh="游戏/娱乐">Games & Entertainment</span>
+            <span class="category-count">3</span>
+          </div>
+          <div class="category-ideas">
+            <a href="https://github.com/ArcBlock/dappideas/issues/13" target="_blank" class="category-idea"><span><span class="category-idea-num">#13</span><span data-en="2048 Token Game" data-zh="2048 代币游戏">2048 Token Game</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/71" target="_blank" class="category-idea"><span><span class="category-idea-num">#71</span><span data-en="RPGMaker Plugin" data-zh="RPGMaker 插件">RPGMaker Plugin</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/9" target="_blank" class="category-idea"><span><span class="category-idea-num">#9</span><span data-en="Avatar Generator" data-zh="头像生成器">Avatar Generator</span></span></a>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-name">
+            <span data-en="DAO & HR" data-zh="DAO/HR">DAO & HR</span>
+            <span class="category-count">2</span>
+          </div>
+          <div class="category-ideas">
+            <a href="https://github.com/ArcBlock/dappideas/issues/90" target="_blank" class="category-idea"><span><span class="category-idea-num">#90</span><span data-en="Decentralized HR Tool" data-zh="去中心化 HR 工具">Decentralized HR Tool</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/112" target="_blank" class="category-idea"><span><span class="category-idea-num">#112</span><span data-en="ETH Payroll" data-zh="以太薪资发放">ETH Payroll</span></span></a>
+          </div>
+        </div>
+
+        <div class="category-card">
+          <div class="category-name">
+            <span data-en="Infrastructure" data-zh="基础设施">Infrastructure</span>
+            <span class="category-count">5</span>
+          </div>
+          <div class="category-ideas">
+            <a href="https://github.com/ArcBlock/dappideas/issues/294" target="_blank" class="category-idea"><span><span class="category-idea-num">#294</span><span data-en="Cloudflare Tunnel" data-zh="Cloudflare Tunnel">Cloudflare Tunnel</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/292" target="_blank" class="category-idea"><span><span class="category-idea-num">#292</span><span data-en="Secure File Exchange" data-zh="安全文件交换">Secure File Exchange</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/286" target="_blank" class="category-idea"><span><span class="category-idea-num">#286</span><span data-en="Snapdrop" data-zh="Snapdrop">Snapdrop</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/280" target="_blank" class="category-idea"><span><span class="category-idea-num">#280</span><span data-en="Social Verification Oracle" data-zh="社交验证预言机">Social Verification Oracle</span></span></a>
+            <a href="https://github.com/ArcBlock/dappideas/issues/282" target="_blank" class="category-idea"><span><span class="category-idea-num">#282</span><span data-en="Privacy Compliance" data-zh="隐私合规组件">Privacy Compliance</span></span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Wins Section -->
+    <section id="quickwin" class="section">
+      <div class="section-header">
+        <h2 class="section-title" data-en="// QUICK WINS" data-zh="// 快速实现">// QUICK WINS</h2>
+        <p class="section-desc" data-en="Simple projects suitable for AI Agent autonomous development" data-zh="适合 AI Agent 自主开发的简单项目">Simple projects suitable for AI Agent autonomous development</p>
+      </div>
+
+      <div class="quickwin-list">
+        <a href="https://github.com/ArcBlock/dappideas/issues/106" target="_blank" class="quickwin-item">
+          <span class="quickwin-num">#106</span>
+          <div class="quickwin-content">
+            <div class="quickwin-title" data-en="Personal Link Page" data-zh="个人链接页面">Personal Link Page</div>
+            <div class="quickwin-reason" data-en="Simple, practical, Linktree clone" data-zh="简单实用，Linktree 克隆">Simple, practical, Linktree clone</div>
+          </div>
+          <span class="quickwin-arrow">-&gt;</span>
+        </a>
+        <a href="https://github.com/ArcBlock/dappideas/issues/66" target="_blank" class="quickwin-item">
+          <span class="quickwin-num">#66</span>
+          <div class="quickwin-content">
+            <div class="quickwin-title" data-en="RSS Reader" data-zh="RSS 阅读器">RSS Reader</div>
+            <div class="quickwin-reason" data-en="Mature technology, clear specs" data-zh="技术成熟，规格清晰">Mature technology, clear specs</div>
+          </div>
+          <span class="quickwin-arrow">-&gt;</span>
+        </a>
+        <a href="https://github.com/ArcBlock/dappideas/issues/13" target="_blank" class="quickwin-item">
+          <span class="quickwin-num">#13</span>
+          <div class="quickwin-content">
+            <div class="quickwin-title" data-en="2048 Token Game" data-zh="2048 代币游戏">2048 Token Game</div>
+            <div class="quickwin-reason" data-en="Tech demo, game logic is simple" data-zh="技术演示，游戏逻辑简单">Tech demo, game logic is simple</div>
+          </div>
+          <span class="quickwin-arrow">-&gt;</span>
+        </a>
+        <a href="https://github.com/ArcBlock/dappideas/issues/286" target="_blank" class="quickwin-item">
+          <span class="quickwin-num">#286</span>
+          <div class="quickwin-content">
+            <div class="quickwin-title" data-en="Snapdrop File Transfer" data-zh="Snapdrop 文件传输">Snapdrop File Transfer</div>
+            <div class="quickwin-reason" data-en="Useful utility, clear scope" data-zh="实用工具，范围明确">Useful utility, clear scope</div>
+          </div>
+          <span class="quickwin-arrow">-&gt;</span>
+        </a>
+        <a href="https://github.com/ArcBlock/dappideas/issues/9" target="_blank" class="quickwin-item">
+          <span class="quickwin-num">#9</span>
+          <div class="quickwin-content">
+            <div class="quickwin-title" data-en="Avatar Generator" data-zh="头像生成器">Avatar Generator</div>
+            <div class="quickwin-reason" data-en="NFT basics, well-defined" data-zh="NFT 基础，定义清晰">NFT basics, well-defined</div>
+          </div>
+          <span class="quickwin-arrow">-&gt;</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-left">
+        <div data-en="All ideas are CC0 licensed. Free to build." data-zh="所有创意采用 CC0 许可证，可自由使用。">All ideas are CC0 licensed. Free to build.</div>
+        <div style="margin-top: 8px; opacity: 0.6;">Evaluated by LLM &middot; 2026</div>
+      </div>
+      <pre class="footer-ascii">
+ ╭───────────────────────────╮
+ │  github.com/ArcBlock      │
+ │  /dappideas               │
+ ╰───────────────────────────╯</pre>
+    </div>
+  </footer>
+
+  <script>
+    // Language toggle
+    let currentLang = 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+        const text = el.getAttribute('data-' + lang);
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = text;
+        } else {
+          el.innerHTML = text;
+        }
+      });
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+
+      document.documentElement.lang = lang;
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
+
+    // Section navigation
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const section = tab.dataset.section;
+
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(section).classList.add('active');
+      });
+    });
+
+    // Detect browser language
+    if (navigator.language.startsWith('zh')) {
+      setLanguage('zh');
+    }
+  </script>
+</body>
+</html>
